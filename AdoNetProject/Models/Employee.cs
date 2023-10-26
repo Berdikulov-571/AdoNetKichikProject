@@ -1,8 +1,9 @@
 ﻿using AdoNetProject.Enums;
+using AdoNetProject.Interfaces;
 
 namespace AdoNetProject.Models
 {
-    public class Employee
+    public class Employee : IAuditable
     {
         public int Id { get; set; }
         public string Name {get;set;} 
@@ -12,5 +13,8 @@ namespace AdoNetProject.Models
         public string Password {get;set;} 
         public Status Status {get;set;} 
         public Role Role { get;set;}
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifyDate { get; set; }
+        public DateTime DeletedDate { get; set; }
     }
 }
