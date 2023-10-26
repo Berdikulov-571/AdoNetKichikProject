@@ -1,6 +1,7 @@
 ﻿using AdoNetProject.Dtos;
 using AdoNetProject.Enums;
 using AdoNetProject.Interfaces;
+using AdoNetProject.Models;
 using System.Data.SqlClient;
 
 namespace AdoNetProject.Services
@@ -8,6 +9,8 @@ namespace AdoNetProject.Services
     public class EmployeeService : IEmployeeRepository
     {
         public static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=StudyCenterDB;Trusted_Connection=True;";
+
+
         public void CreateEmployee(EmployeeDTO employee)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -26,27 +29,83 @@ namespace AdoNetProject.Services
 
         public void DeleteEmployee(int EmployeeId)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                string query = $"update Employee set Status = '{Status.Deleted}',DeletedDate = '{DateTime.UtcNow}' where Id = {EmployeeId} and Status <> 'Deleted';";
+                SqlCommand command = new SqlCommand(query, connection);
+                using (SqlDataReader reader = command.ExecuteReader()) { }
+            }
         }
-
         public void EmployeeDeepDelete(int EmployeeId)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                string query = $"delete from Employee where Id = {EmployeeId};";
+                SqlCommand command = new SqlCommand(query, connection);
+                using (SqlDataReader reader = command.ExecuteReader()) { }
+            }
         }
-
         public void GetAllEmployees()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                string query = $"select * from Employee where Status <> 'Deleted'";
+                SqlCommand command = new SqlCommand(query, connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    bool res = false;
+                    while (reader.Read())
+                    {
+                        res = true;
+                        Console.WriteLine($"{reader["Id"]} {reader["Name"]} {reader["Surname"]} {reader["Email"]} {reader["Login"]} {reader["Password"]} {reader["Status"]} {reader["CreatedDate"]} {reader["ModifyDate"]} {reader["DeletedDate"]}");
+                    }
+                    if (res == false)
+                    {
+                        Console.WriteLine("Ma'lumot topilmadi");
+                    }
+                }
+            }
         }
-
         public void GetEmployeeById(int EmployeeId)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                string query = $"select * from Employee where Id = {EmployeeId} and Status <> 'Deleted'";
+                SqlCommand command = new SqlCommand(query, connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    bool res = false;
+                    while (reader.Read())
+                    {
+                        res = true;
+                        Console.WriteLine($"{reader["Id"]} {reader["Name"]} {reader["Surname"]} {reader["Email"]} {reader["Login"]} {reader["Password"]} {reader["Status"]} {reader["CreatedDate"]} {reader["ModifyDate"]} {reader["DeletedDate"]}");
+                    }
+                    if (res == false)
+                    {
+                        Console.WriteLine("Ma'lumot topilmadi");
+                    }
+                }
+            }
         }
 
-        public void UpdateEmployee(EmployeeDTO employee)
+        public void UpdateEmployee(int EmployeeId,EmployeeDTO employee)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                string query = $"update Employee set Name = '{employee.Name}',surname = '{employee.Surname}',email = '{employee.Email}',login = '{employee.Login}',password = '{employee.Password}',status = '{Status.Updated}',role = '{employee.Role}',modifydate='{DateTime.Now}' where Id = {EmployeeId} and Status <> 'Deleted';";
+                SqlCommand command = new SqlCommand(query, connection);
+                using (SqlDataReader reader = command.ExecuteReader()) { }
+            }
         }
     }
 }

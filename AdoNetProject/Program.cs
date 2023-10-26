@@ -10,16 +10,23 @@ namespace AdoNetProject
         {
             EmployeeService employee = new EmployeeService();
 
+            //employee.DeleteEmployee(7);
+
             EmployeeDTO em = new EmployeeDTO();
 
-            em.Name = "Sanjarbek";
-            em.Surname = "Berdikulov";
-            em.Email = "bsanjarbek06@gmail.com";
-            em.Login = "berdikulov_571";
-            em.Password = "sanjarbek2006";
-            em.Role = Enums.Role.Admin;
+            //employee.GetEmployeeById(7);
 
-            employee.CreateEmployee(em);
+            //em.Name = "sanjarbek";
+            //em.Surname = "berdikulov";
+            //em.Email = "alisher@gmail.com";
+            //em.Login = "ali";
+            //em.Password = "alisher1980";
+            //em.Role = Enums.Role.Admin;
+
+            //employee.CreateEmployee(em);
+
+            //employee.UpdateEmployee(6, em);
+            //employee.EmployeeDeepDelete(8);
         }
     }
 }
