@@ -1,5 +1,6 @@
-﻿using AdoNetProject.Interfaces;
-using AdoNetProject.Models;
+﻿using AdoNetProject.Dtos;
+using AdoNetProject.Enums;
+using AdoNetProject.Interfaces;
 using System.Data.SqlClient;
 
 namespace AdoNetProject.Services
@@ -7,7 +8,7 @@ namespace AdoNetProject.Services
     public class EmployeeService : IEmployeeRepository
     {
         public static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=StudyCenterDB;Trusted_Connection=True;";
-        public void CreateEmployee(Employee employee)
+        public void CreateEmployee(EmployeeDTO employee)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -15,7 +16,7 @@ namespace AdoNetProject.Services
 
                 connection.Open();
 
-                string query = $"insert into Employee(Name,Surname,Email,Login,Password,Status,Role,CreatedDate) values('{employee.Name}', '{employee.Surname}', '{employee.Email}','{employee.Login}','{employee.Password}','{employee.Status}','{employee.Role}','{DateTime.Now}')";
+                string query = $"insert into Employee(Name,Surname,Email,Login,Password,Status,Role) values('{employee.Name}', '{employee.Surname}', '{employee.Email}','{employee.Login}','{employee.Password}','{Status.Created}','{employee.Role}')";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
@@ -43,7 +44,7 @@ namespace AdoNetProject.Services
             throw new NotImplementedException();
         }
 
-        public void UpdateEmployee(Employee employee)
+        public void UpdateEmployee(EmployeeDTO employee)
         {
             throw new NotImplementedException();
         }
