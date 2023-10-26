@@ -1,5 +1,6 @@
 ﻿using AdoNetProject.Dtos;
 using AdoNetProject.Enums;
+using AdoNetProject.Hash;
 using AdoNetProject.Interfaces;
 using AdoNetProject.Models;
 using System.Data.SqlClient;
@@ -19,11 +20,15 @@ namespace AdoNetProject.Services
 
                 connection.Open();
 
-                string query = $"insert into Employee(Name,Surname,Email,Login,Password,Status,Role) values('{employee.Name}', '{employee.Surname}', '{employee.Email}','{employee.Login}','{employee.Password}','{Status.Created}','{employee.Role}')";
+                string query = $"insert into Employee(Name,Surname,Email,Login,Password,Status,Role) values('{employee.Name}', '{employee.Surname}', '{employee.Email}','{employee.Login}','{Hash512.ComputeSHA512HashFromString(employee.Password)}','{Status.Created}','{employee.Role}')";
 
                 SqlCommand command = new SqlCommand(query, connection);
 
-                using (SqlDataReader reader = command.ExecuteReader()) { }
+                try
+                {
+                    using (SqlDataReader reader = command.ExecuteReader()) { }
+                }
+
             }
         }
 

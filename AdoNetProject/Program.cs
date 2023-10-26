@@ -16,14 +16,14 @@ namespace AdoNetProject
 
             //employee.GetEmployeeById(7);
 
-            //em.Name = "sanjarbek";
-            //em.Surname = "berdikulov";
-            //em.Email = "alisher@gmail.com";
-            //em.Login = "ali";
-            //em.Password = "alisher1980";
-            //em.Role = Enums.Role.Admin;
+            em.Name = "sanjarbek";
+            em.Surname = "berdikulov";
+            em.Email = "alisher@gmail.com";
+            em.Login = "ali";
+            em.Password = "alisher1980";
+            em.Role = Enums.Role.Admin;
 
-            //employee.CreateEmployee(em);
+            employee.CreateEmployee(em);
 
             //employee.UpdateEmployee(6, em);
             //employee.EmployeeDeepDelete(8);
