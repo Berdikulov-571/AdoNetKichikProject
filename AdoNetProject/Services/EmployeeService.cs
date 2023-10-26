@@ -27,8 +27,12 @@ namespace AdoNetProject.Services
                 try
                 {
                     using (SqlDataReader reader = command.ExecuteReader()) { }
+                    Console.WriteLine("Employee Yaratildi");
                 }
-
+                catch
+                {
+                    Console.WriteLine("Bu UserName yoki Password Oldin ro'yxatdan utgan");
+                }
             }
         }
 
@@ -40,7 +44,10 @@ namespace AdoNetProject.Services
                 connection.Open();
                 string query = $"update Employee set Status = '{Status.Deleted}',DeletedDate = '{DateTime.UtcNow}' where Id = {EmployeeId} and Status <> 'Deleted';";
                 SqlCommand command = new SqlCommand(query, connection);
-                using (SqlDataReader reader = command.ExecuteReader()) { }
+                using (SqlDataReader reader = command.ExecuteReader()) 
+                {
+                    Console.WriteLine("Uchirildi");
+                }
             }
         }
         public void EmployeeDeepDelete(int EmployeeId)
@@ -51,7 +58,10 @@ namespace AdoNetProject.Services
                 connection.Open();
                 string query = $"delete from Employee where Id = {EmployeeId};";
                 SqlCommand command = new SqlCommand(query, connection);
-                using (SqlDataReader reader = command.ExecuteReader()) { }
+                using (SqlDataReader reader = command.ExecuteReader()) 
+                {
+                    Console.WriteLine("Uchirildi");
+                }
             }
         }
         public void GetAllEmployees()
@@ -109,7 +119,10 @@ namespace AdoNetProject.Services
                 connection.Open();
                 string query = $"update Employee set Name = '{employee.Name}',surname = '{employee.Surname}',email = '{employee.Email}',login = '{employee.Login}',password = '{employee.Password}',status = '{Status.Updated}',role = '{employee.Role}',modifydate='{DateTime.Now}' where Id = {EmployeeId} and Status <> 'Deleted';";
                 SqlCommand command = new SqlCommand(query, connection);
-                using (SqlDataReader reader = command.ExecuteReader()) { }
+                using (SqlDataReader reader = command.ExecuteReader()) 
+                {
+                    Console.WriteLine("Yangilandi");
+                }
             }
         }
     }
