@@ -1,6 +1,7 @@
 ﻿namespace AdoNetProject.Services
 {
-    internal class UserService
+    public class UserService
     {
+
     }
 }
