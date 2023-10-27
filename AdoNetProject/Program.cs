@@ -63,25 +63,14 @@ namespace AdoNetProject
                 new Teacher() {Id = 2,firstName = "MuhammadAbdulloh",lastName = "Komilov",uquvShakli="Kechgi"},
             };
 
-            var result = teachers.GroupJoin(students,
-                                            students => students.uquvShakli,
-                                            teachers => teachers.uquvShakli,
-                                            (teachers, students) => new
-                                            {
-                                                teachers = teachers,
-                                                students = students
-                                            }).ToList();
 
-            foreach (var i in result)
+            students.Insert(0, new Student()
             {
-                Console.Write("Teacher: ");
-                Console.WriteLine($"{i.teachers.firstName} {i.teachers.lastName} {i.teachers.uquvShakli}");
-                foreach (var j in i.students)
-                {
-                    Console.WriteLine($"{j.firstName} {j.lastName} {j.uquvShakli}");
-                }
-                Console.WriteLine();
-            }
+                 Id = 7,
+                 firstName = "Kamron",
+                 lastName = "Bilmadim",
+                 uquvShakli = "Kunduzgi"
+            });
 
 
 
