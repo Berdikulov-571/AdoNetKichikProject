@@ -64,13 +64,13 @@ namespace AdoNetProject
             };
 
 
-            students.Insert(0, new Student()
+            var res = students.IntersectBy(teachers.Select(x => x.Id),x => x.Id);
+
+            foreach (var i in res)
             {
-                 Id = 7,
-                 firstName = "Kamron",
-                 lastName = "Bilmadim",
-                 uquvShakli = "Kunduzgi"
-            });
+                Console.WriteLine(i.firstName);
+            }
+
 
 
 
