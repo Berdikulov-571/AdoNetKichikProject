@@ -2,7 +2,6 @@
 using AdoNetProject.Enums;
 using AdoNetProject.Hash;
 using AdoNetProject.Interfaces;
-using AdoNetProject.Models;
 using System.Data.SqlClient;
 
 namespace AdoNetProject.Services
@@ -44,7 +43,7 @@ namespace AdoNetProject.Services
                 connection.Open();
                 string query = $"update Employee set Status = '{Status.Deleted}',DeletedDate = '{DateTime.UtcNow}' where Id = {EmployeeId} and Status <> 'Deleted';";
                 SqlCommand command = new SqlCommand(query, connection);
-                using (SqlDataReader reader = command.ExecuteReader()) 
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
                     Console.WriteLine("Uchirildi");
                 }
@@ -58,7 +57,7 @@ namespace AdoNetProject.Services
                 connection.Open();
                 string query = $"delete from Employee where Id = {EmployeeId};";
                 SqlCommand command = new SqlCommand(query, connection);
-                using (SqlDataReader reader = command.ExecuteReader()) 
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
                     Console.WriteLine("Uchirildi");
                 }
@@ -111,7 +110,7 @@ namespace AdoNetProject.Services
             }
         }
 
-        public void UpdateEmployee(int EmployeeId,EmployeeDTO employee)
+        public void UpdateEmployee(int EmployeeId, EmployeeDTO employee)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -119,7 +118,7 @@ namespace AdoNetProject.Services
                 connection.Open();
                 string query = $"update Employee set Name = '{employee.Name}',surname = '{employee.Surname}',email = '{employee.Email}',login = '{employee.Login}',password = '{employee.Password}',status = '{Status.Updated}',role = '{employee.Role}',modifydate='{DateTime.Now}' where Id = {EmployeeId} and Status <> 'Deleted';";
                 SqlCommand command = new SqlCommand(query, connection);
-                using (SqlDataReader reader = command.ExecuteReader()) 
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
                     Console.WriteLine("Yangilandi");
                 }
