@@ -54,6 +54,7 @@ namespace AdoNetProject
                 new Student() {Id = 3,firstName = "Sardor",lastName = "Sohibnazarov",uquvShakli="Kunduzgi"},
                 new Student() {Id = 4,firstName = "Sarvar",lastName = "Murodovich",uquvShakli="Kechgi"},
                 new Student() {Id = 5,firstName = "Jonibek",lastName = "Turdiyev",uquvShakli="Kunduzgi"},
+                new Student() {Id = 6,firstName = "Jonibek",lastName = "Turdiyev",uquvShakli="Bilmadim"},
             };
 
             List<Teacher> teachers = new List<Teacher>()
@@ -62,7 +63,7 @@ namespace AdoNetProject
                 new Teacher() {Id = 2,firstName = "MuhammadAbdulloh",lastName = "Komilov",uquvShakli="Kechgi"},
             };
 
-            var result = students.GroupJoin(students,
+            var result = teachers.GroupJoin(students,
                                             students => students.uquvShakli,
                                             teachers => teachers.uquvShakli,
                                             (teachers, students) => new
